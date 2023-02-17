@@ -11,10 +11,10 @@ require("dotenv/config");
 //Import router
 const postsRoute = require("./routes/posts");
 app.get("/", (req, res) => {
-  res.json("API-TEST");
+  res.json("API-AiLaunchpad");
 });
 
-app.use("/nft", postsRoute);
+app.use("/api", postsRoute);
 
 
 

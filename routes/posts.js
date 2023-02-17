@@ -12,14 +12,6 @@ router.get("/", async (req, res) => {
   }
 });
 
-router.get("/nft/:postId", async (req, res) => {
-  try {
-    const post = await Post.findById(req.params.postId);
-    res.json(post);
-  } catch (error) {
-    res.json(error);
-  }
-});
 router.post("/", async (req, res) => {
   console.log(req.body);
   const post = new Post({
