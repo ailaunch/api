@@ -40,7 +40,7 @@ const telegramToken = process.env.TELEGRAM_KEY;
 const bot = new TelegramBot(telegramToken, {polling: true});
 
 // bot.on('message', (msg) => {
-  bot.onText(/^\/chat_bot (.+)/, (msg, match) => {
+  bot.onText(/^\/aipad_bot (.+)/, (msg, match) => {
   const chatId = msg.chat.id;   
   // const chatMsg = msg.text;  
   const chatMsg = match[1].toLocaleLowerCase()
