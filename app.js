@@ -30,3 +30,33 @@ const PORT = process.env.PORT || 3001
 app.listen(PORT, () => {
   console.log('PORT:' + `http://localhost:${PORT}`);
 });
+
+const TelegramBot = require('node-telegram-bot-api');
+const ChatGPTService = require('./services/chatgpt.service');
+
+const telegramToken = process.env.TELEGRAM_KEY;
+
+
+const bot = new TelegramBot(telegramToken, {polling: true});
+
+// bot.on('message', (msg) => {
+  bot.onText(/^\/chat_bot (.+)/, (msg, match) => {
+  const chatId = msg.chat.id;   
+  // const chatMsg = msg.text;  
+  const chatMsg = match[1].toLocaleLowerCase()
+  console.log({chatId});   
+  console.log({chatMsg}); 
+  if (chatMsg.toLowerCase().includes("launchpad")) {
+    bot.sendMessage(chatId, "The Next-Generation platform for incubating AI projects.");
+    return
+  }  
+  if (chatMsg.toLowerCase().includes("ido")) {
+    bot.sendMessage(chatId, "Comming soon");
+    return
+  }  
+
+  ChatGPTService.generateCompletion(chatMsg).then(responseMsg => {
+    bot.sendMessage(chatId, responseMsg);
+  });
+});
+

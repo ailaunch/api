@@ -14,17 +14,33 @@ router.get("/", async (req, res) => {
 
 router.post("/", async (req, res) => {
   console.log(req.body);
+  // const post = new Post({
+  //   _id: req.body._id,
+  //   name: req.body.name,
+  //   description: req.body.description,
+  //   image: req.body.image,
+  //   tier: req.body.tier,
+  //   efficiency: req.body.efficiency,
+  //   rarity: req.body.rarity,
+  //   durability: req.body.durability,
+  //   luck: req.body.luck,
+  //   rate: req.body.rate,
+  // });
   const post = new Post({
     _id: req.body._id,
     name: req.body.name,
     description: req.body.description,
     image: req.body.image,
-    tier: req.body.tier,
-    efficiency: req.body.efficiency,
-    rarity: req.body.rarity,
-    durability: req.body.durability,
-    luck: req.body.luck,
-    rate: req.body.rate,
+    attributes: [
+      {
+        trait_type: "Level",
+        value: req.body.level
+      },
+      {
+        trait_type: "Rate",
+        value: req.body.rate
+      }
+    ]
   });
   try {
     const savedPost = await post.save();
