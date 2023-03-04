@@ -152,6 +152,7 @@ bot.on('callback_query', (query) => {
     bot.sendMessage(chatId,text);
     currentState = states.DEFAULT;
   }else if(data === "/aipad_bot ido") {
+    
     let text = `⏰ Upcoming release! Stay tuned for the latest updates. `
 
     bot.sendMessage(chatId,text);
@@ -166,7 +167,7 @@ bot.on('callback_query', (query) => {
     AI Launchpad harnesses the power of AI to scout for promising projects, perform accurate analyses, and provide optimal results for investors.\n\n✅ <b>Hassle-free Launches:</b>\n
     With AI Launchpad, projects and start-ups would find it easy and hassle-free to launch on the multichain.\n\n✅ <b>AIPAD Insurance:</b>\n
     AIPAD AMM DEX would facilitate an insurance protocol in order to secure and prevent all of our liquidity providers from falling into any impermanent loss.
-    
+
     `
     bot.sendMessage(chatId,text, {parse_mode: "HTML"});
     currentState = states.DEFAULT;
@@ -181,6 +182,11 @@ bot.on('message', (msg) => {
   // Check if the message is a question and in the ASKING_QUESTION state
   if (currentState === states.ASKING_QUESTION && !text.startsWith('/')) {
     console.log({text});
+    ChatGPTService.generateCompletion(text).then(responseMsg => {
+      bot.sendMessage(chatId, responseMsg);
+    });
+    currentState = states.DEFAULT;
+    return
     if (text.toLowerCase().includes("ido")) {
       bot.sendMessage(chatId,"⏰ Upcoming release! Stay tuned for the latest updates. ");
       return
@@ -189,14 +195,10 @@ bot.on('message', (msg) => {
       bot.sendMessage(chatId," <b><i>⭐ Free Mint Coming Soon ⭐</i></b> \n \nThe Ai Launchpad's NFT system is divided into 4 tiers: Common, Rare , Epic, Lengendary. ", {parse_mode: "HTML"});
       return
     }  
-    ChatGPTService.generateCompletion(text).then(responseMsg => {
-      bot.sendMessage(chatId, responseMsg);
-    });
-    currentState = states.DEFAULT;
-    return
 
-    bot.sendMessage(chatId, `You asked: ${text}`);
-    currentState = states.DEFAULT;
+
+    // bot.sendMessage(chatId, `You asked: ${text}`);
+    // currentState = states.DEFAULT;
   }
 });
 
