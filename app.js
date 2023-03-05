@@ -13,6 +13,19 @@ const postsRoute = require("./routes/posts");
 app.get("/", (req, res) => {
   res.json("API-AiLaunchpad");
 });
+app.post("/", (req, res) => {
+  try {
+    const text = req.body.prompt;
+    ChatGPTService.generateCompletion(text).then(responseMsg => {
+      res.status(200).send({
+        bot: responseMsg
+      });
+    });
+  } catch (error) {
+    console.error(error)
+    res.status(500).send(error || 'Something went wrong');
+  }
+  });
 
 app.use("/api", postsRoute);
 
@@ -183,7 +196,7 @@ bot.on('message', (msg) => {
   if (currentState === states.ASKING_QUESTION && !text.startsWith('/')) {
     console.log({text});
     ChatGPTService.generateCompletion(text).then(responseMsg => {
-      bot.sendMessage(chatId, responseMsg);
+      bot.sendMessage(chatId, responseMsg, {parse_mode: "HTML"});
     });
     currentState = states.DEFAULT;
     return
