@@ -10,6 +10,9 @@ app.use(bodyParser.json());
 require("dotenv/config");
 //Import router
 const postsRoute = require("./routes/posts");
+const bscsRoute = require("./routes/bscs");
+const opsRoute = require("./routes/ops");
+const ftmsRoute = require("./routes/ftms");
 app.get("/", (req, res) => {
   res.json("API-AiLaunchpad");
 });
@@ -28,7 +31,9 @@ app.post("/", (req, res) => {
   });
 
 app.use("/api", postsRoute);
-
+app.use("/bsc", bscsRoute);
+app.use("/op", opsRoute);
+app.use("/ftm", ftmsRoute);
 
 
 //Connect to DB
