@@ -160,7 +160,7 @@ bot.on('callback_query', (query) => {
     bot.sendMessage(chatId, responseText, options);
     currentState = states.ASKING_QUESTION;
   } else if (data === "/aipad_bot nft") {
-    let text = ` <b><i>⭐ Free Mint Coming Soon ⭐</i></b> \n \nThe Ai Launchpad's NFT system is divided into 4 tiers: Common, Rare , Epic, Lengendary. \n \nStaking Model and Key Tiers: The protocol uses a tier based system to determine the guaranteed allocation for each participant in a pool. \nStaking LP tokens or an NFT qualifies token holders within the AIPAD tiered system. Access and chance to participate in AI Launchpad's decentralized investment protocol is dependent on the assigned Tier level. \nAllocation Tiers are identified based on the tokens amounts held at the time of the snapshot. Providing multiple tiers catters to the investor’s individual risk profile all the while preventing bot manipulation and other market-making actors from front running the token generation event.`
+    let text = ` <b><i>⭐ ⏰ Mint free start time : Mar 13 | 15:00 UTC ⭐</i></b> \n \nThe Ai Launchpad's NFT system is divided into 4 tiers: Common, Rare , Epic, Lengendary. \n \nStaking Model and Key Tiers: The protocol uses a tier based system to determine the guaranteed allocation for each participant in a pool. \nStaking LP tokens or an NFT qualifies token holders within the AIPAD tiered system. Access and chance to participate in AI Launchpad's decentralized investment protocol is dependent on the assigned Tier level. \nAllocation Tiers are identified based on the tokens amounts held at the time of the snapshot. Providing multiple tiers catters to the investor’s individual risk profile all the while preventing bot manipulation and other market-making actors from front running the token generation event.`
     
     bot.sendMessage(chatId,text, {parse_mode: "HTML"});
     currentState = states.DEFAULT;
@@ -199,7 +199,7 @@ bot.on('message', (msg) => {
   // bot.onText(/^\/submittest (.+)/, (msg, match) => {
     if (text.startsWith('/submittest ')) {
 
-    const chatMsg = text.substr('/submittest '.length).toLocaleLowerCase();
+    // const chatMsg = text.substr('/submittest '.length).toLocaleLowerCase();
     
  
     bot.sendMessage(chatId, "<b><i> ⭐ We have processed your request and would like to extend our sincere appreciation for your contribution. </i></b> ⭐", {parse_mode: "HTML"});
