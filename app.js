@@ -171,7 +171,7 @@ bot.on('callback_query', (query) => {
     currentState = states.DEFAULT;
   }else if(data === "/aipad_bot ido") {
     
-    let text = `⏰ Upcoming release! Stay tuned for the latest updates. `
+    let text = `⏰ IDO start time : Mar 15 | 08:00 AM UTC `
 
     bot.sendMessage(chatId,text);
     currentState = states.DEFAULT;
@@ -196,7 +196,16 @@ bot.on('callback_query', (query) => {
 bot.on('message', (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text;
+  bot.onText(/^\/submittest (.+)/, (msg, match) => {
+    const chatId = msg.chat.id;   
+    // const chatMsg = msg.text;  
+    const chatMsg = match[1].toLocaleLowerCase()
+ 
+      bot.sendMessage(chatId, "<b><i> ⭐ We have processed your request and would like to extend our sincere appreciation for your contribution. </i></b> ⭐", {parse_mode: "HTML"});
+   
+  
 
+  });
   // Check if the message is a question and in the ASKING_QUESTION state
   if (currentState === states.ASKING_QUESTION && !text.startsWith('/')) {
     console.log({text});
